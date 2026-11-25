@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "hilm": {
+      "type": "http",
+      "url": "https://hilm-os-backend-production.up.railway.app/mcp",
+      "headers": { "Authorization": "Bearer ${user_config.token}" }
+    }
+  }
+}

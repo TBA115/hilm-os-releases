@@ -1,0 +1,3 @@
+# The plugin's files are read by Claude Code on every kind of laptop: plain line endings.
+.claude-plugin/** text eol=lf
+plugins/** text eol=lf

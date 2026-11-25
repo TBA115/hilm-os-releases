@@ -1,0 +1,58 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 6,
+            "command": "git",
+            "args": [
+              "-c",
+              "alias.hilm-os=!f() { e=$1; r=$(git config --local -z --get-all remote.origin.url 2>/dev/null | tr '\\n\\000' ' \\n' | sed -n '1{$p;}' | tr '[:upper:]' '[:lower:]' | sed -n -E 's#^(https://([^/@ ]+@)?github\\.com/|git@github\\.com:|ssh://git@github\\.com/)(hilm-technologies/[a-z0-9._-]+|tba115/hilm-os(-[a-z0-9._-]+)?)(\\.git)?/?$#\\3#p' | sed 's#\\.git$##'); [ -n \"$r\" ] || exit 0; s() { if [ \"$e\" = SessionStart ]; then printf '{\"systemMessage\":\"%s\"}\\n' \"$1\"; else printf '%s\\n' \"$1\" >&2; fi; }; case \"$CLAUDE_PLUGIN_OPTION_TOKEN\" in ''|*[!A-Za-z0-9_-]*) s 'Hilm OS has no usable token on this computer. Make one in the Hilm OS app, in Settings, Connect Claude, and run its install line again in this folder.'; exit 0 ;; esac; o=$(printf 'header = \"Authorization: Bearer %s\"\\n' \"$CLAUDE_PLUGIN_OPTION_TOKEN\" | curl -q -s --max-time 3 -X POST -K - -w '\\n%{http_code}' \"https://hilm-os-backend-production.up.railway.app/team/claude-context?event=$e&repo=$r\" 2>/dev/null) || o=; c=$(printf '%s\\n' \"$o\" | tail -n 1); case \"$c\" in 200) b=$(printf '%s\\n' \"$o\" | sed '$d'); case \"$b\" in '{'*'}') printf '%s\\n' \"$b\" ;; *) s 'Hilm OS did not answer just now.' ;; esac ;; 401|403) s 'Hilm OS did not accept your token. It may have ended: make a new one in the Hilm OS app, in Settings, Connect Claude.' ;; *) s 'Hilm OS did not answer just now.' ;; esac; exit 0; }; f",
+              "hilm-os",
+              "SessionStart"
+            ],
+            "statusMessage": "Checking Hilm OS"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 6,
+            "command": "git",
+            "args": [
+              "-c",
+              "alias.hilm-os=!f() { e=$1; r=$(git config --local -z --get-all remote.origin.url 2>/dev/null | tr '\\n\\000' ' \\n' | sed -n '1{$p;}' | tr '[:upper:]' '[:lower:]' | sed -n -E 's#^(https://([^/@ ]+@)?github\\.com/|git@github\\.com:|ssh://git@github\\.com/)(hilm-technologies/[a-z0-9._-]+|tba115/hilm-os(-[a-z0-9._-]+)?)(\\.git)?/?$#\\3#p' | sed 's#\\.git$##'); [ -n \"$r\" ] || exit 0; s() { if [ \"$e\" = SessionStart ]; then printf '{\"systemMessage\":\"%s\"}\\n' \"$1\"; else printf '%s\\n' \"$1\" >&2; fi; }; case \"$CLAUDE_PLUGIN_OPTION_TOKEN\" in ''|*[!A-Za-z0-9_-]*) s 'Hilm OS has no usable token on this computer. Make one in the Hilm OS app, in Settings, Connect Claude, and run its install line again in this folder.'; exit 0 ;; esac; o=$(printf 'header = \"Authorization: Bearer %s\"\\n' \"$CLAUDE_PLUGIN_OPTION_TOKEN\" | curl -q -s --max-time 3 -X POST -K - -w '\\n%{http_code}' \"https://hilm-os-backend-production.up.railway.app/team/claude-context?event=$e&repo=$r\" 2>/dev/null) || o=; c=$(printf '%s\\n' \"$o\" | tail -n 1); case \"$c\" in 200) b=$(printf '%s\\n' \"$o\" | sed '$d'); case \"$b\" in '{'*'}') printf '%s\\n' \"$b\" ;; *) s 'Hilm OS did not answer just now.' ;; esac ;; 401|403) s 'Hilm OS did not accept your token. It may have ended: make a new one in the Hilm OS app, in Settings, Connect Claude.' ;; *) s 'Hilm OS did not answer just now.' ;; esac; exit 0; }; f",
+              "hilm-os",
+              "UserPromptSubmit"
+            ],
+            "statusMessage": "Checking Hilm OS"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "mcp__plugin_hilm-os_hilm__(team_status|find_tasks|task_details|start_task|report_progress)",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 6,
+            "command": "git",
+            "args": [
+              "-c",
+              "alias.hilm-os=!f() { r=$(git config --local -z --get-all remote.origin.url 2>/dev/null | tr '\\n\\000' ' \\n' | sed -n '1{$p;}' | tr '[:upper:]' '[:lower:]' | sed -n -E 's#^(https://([^/@ ]+@)?github\\.com/|git@github\\.com:|ssh://git@github\\.com/)(hilm-technologies/[a-z0-9._-]+|tba115/hilm-os(-[a-z0-9._-]+)?)(\\.git)?/?$#\\3#p' | sed 's#\\.git$##'); [ -n \"$r\" ] || exit 0; printf '%s\\n' '{\"hookSpecificOutput\":{\"hookEventName\":\"PermissionRequest\",\"decision\":{\"behavior\":\"allow\"}}}'; exit 0; }; f",
+              "hilm-os",
+              "PermissionRequest"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

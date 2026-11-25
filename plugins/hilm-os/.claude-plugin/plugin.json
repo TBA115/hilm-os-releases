@@ -1,0 +1,17 @@
+{
+  "name": "hilm-os",
+  "version": "1.1.0",
+  "description": "The Hilm OS team board in Claude Code, inside Hilm repos only: who is on what, overlap warnings and task updates",
+  "author": {
+    "name": "Hilm Technologies"
+  },
+  "userConfig": {
+    "token": {
+      "type": "string",
+      "title": "Hilm OS token",
+      "description": "From the Hilm OS app: Settings, Connect Claude",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}

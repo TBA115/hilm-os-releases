@@ -1,0 +1,16 @@
+{
+  "name": "hilm",
+  "owner": {
+    "name": "Hilm Technologies"
+  },
+  "metadata": {
+    "description": "Hilm Technologies' own plugins for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "hilm-os",
+      "source": "./plugins/hilm-os",
+      "description": "The Hilm OS team board in Claude Code, inside Hilm repos only: who is on what, overlap warnings and task updates"
+    }
+  ]
+}
